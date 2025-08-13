@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rifqy Maulana - Bio Link</title>
+    <!-- Ikon dari Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Font dari Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- START OF MODERN STYLES (Adapted from your file) --- */
+
+        :root {
+            /* Dark Theme Colors (Default) */
+            --bg-primary: #0D1117;
+            --bg-secondary-animated: #161B22;
+            --bg-card: rgba(22, 27, 34, 0.65); /* Slightly more transparent for bio link */
+            --border-color: rgba(240, 246, 252, 0.1);
+            --text-primary: #F0F6FC;
+            --text-secondary: #8B949E;
+            --accent-glow: rgba(59, 130, 246, 0.4); /* Blue glow as requested */
+            --accent-color: #3B82F6;
+
+            /* Universal Values */
+            --radius-lg: 16px;
+            --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none; /* Hide default cursor for desktop */
+            
+            /* Animated Gradient Background */
+            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary-animated), var(--accent-color));
+            background-size: 400% 400%;
+            animation: subtleGradient 20s ease infinite;
+
+            /* Center content */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        @keyframes subtleGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* === INTERACTIVE BACKGROUND & CURSOR (Desktop Only) === */
+        #interactive-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), var(--accent-glow), transparent 80%);
+            z-index: -1;
+            pointer-events: none;
+            transition: background 0.2s ease-out;
+        }
+
+        .cursor {
+            position: fixed;
+            z-index: 9999;
+            pointer-events: none;
+            border-radius: 50%;
+            transition: transform 0.2s, width 0.3s, height 0.3s, opacity 0.3s, background-color 0.3s;
+            transform: translate(-50%, -50%);
+            display: none; /* Hidden by default, shown via JS on non-touch devices */
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-color);
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(59, 130, 246, 0.5);
+        }
+        
+        body:hover .cursor-outline.hover-effect {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.8);
+        }
+
+        /* Main Content Container */
+        .bio-container {
+            width: 100%;
+            max-width: 680px;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-picture {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--border-color);
+            margin-bottom: 20px;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .username {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .user-handle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .links-container {
+            display: grid;
+            gap: 20px;
+        }
+
+        .link-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 18px 25px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: var(--transition-smooth);
+            will-change: transform, box-shadow;
+            text-decoration: none;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            color: #fff;
+        }
+
+        .link-card i {
+            font-size: 1.4rem;
+            margin-right: 15px;
+            width: 25px; /* To align text */
+            text-align: center;
+        }
+
+        /* Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .footer {
+            margin-top: 40px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .cursor { display: none !important; }
+            body { cursor: auto; }
+            .link-card { cursor: pointer; }
+            .username { font-size: 1.8rem; }
+            .profile-picture { width: 100px; height: 100px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Interactive Background & Cursor Elements (Desktop Only) -->
+    <div id="interactive-bg"></div>
+    <div class="cursor cursor-dot"></div>
+    <div class="cursor cursor-outline"></div>
+
+    <main class="bio-container">
+        <img src="https://randomuser.me/api/portraits/men/15.jpg" alt="Foto Profil Rifqy Maulana" class="profile-picture reveal">
+        <h1 class="username reveal">Rifqy Maulana</h1>
+        <p class="user-handle reveal">Digital Enthusiast & Developer</p>
+
+        <div class="links-container">
+            <!-- WhatsApp -->
+            <a href="https://wa.me/6289621810307" target="_blank" class="link-card reveal" style="transition-delay: 100ms;">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>0896 2181 0307</span>
+            </a>
+            <!-- Instagram -->
+            <a href="https://instagram.com/rifqymaulanaa15" target="_blank" class="link-card reveal" style="transition-delay: 200ms;">
+                <i class="fa-brands fa-instagram"></i>
+                <span>@rifqymaulanaa15</span>
+            </a>
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@rifqymaulanaa15" target="_blank" class="link-card reveal" style="transition-delay: 300ms;">
+                <i class="fa-brands fa-tiktok"></i>
+                <span>@rifqymaulanaa15</span>
+            </a>
+            <!-- GitHub -->
+            <a href="https://github.com/Rifqymaulanaa" target="_blank" class="link-card reveal" style="transition-delay: 400ms;">
+                <i class="fa-brands fa-github"></i>
+                <span>Rifqymaulanaa</span>
+            </a>
+            <!-- LinkedIn (Ganti # dengan URL LinkedIn Anda) -->
+            <a href="#" target="_blank" class="link-card reveal" style="transition-delay: 500ms;">
+                <i class="fa-brands fa-linkedin"></i>
+                <span>LinkedIn Profile</span>
+            </a>
+            <!-- Website Pribadi -->
+            <a href="https://rifqymaulana.com" target="_blank" class="link-card reveal" style="transition-delay: 600ms;">
+                <i class="fa-solid fa-globe"></i>
+                <span>rifqymaulana.com</span>
+            </a>
+        </div>
+
+        <footer class="footer reveal" style="transition-delay: 700ms;">
+            <p>&copy; 2025 Rifqy Maulana. Dibuat dengan <i class="fa-solid fa-heart" style="color: #e25555;"></i></p>
+        </footer>
+    </main>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+        // --- INTERACTIVE BACKGROUND & CURSOR (Desktop Only) ---
+        if (!isTouchDevice) {
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+
+            cursorDot.style.display = 'block';
+            cursorOutline.style.display = 'block';
+
+            window.addEventListener('mousemove', (e) => {
+                const { clientX, clientY } = e;
+                // Update posisi untuk radial gradient background
+                document.documentElement.style.setProperty('--mouse-x', `${clientX}px`);
+                document.documentElement.style.setProperty('--mouse-y', `${clientY}px`);
+                
+                // Update posisi untuk custom cursor
+                cursorDot.style.left = `${clientX}px`;
+                cursorDot.style.top = `${clientY}px`;
+                cursorOutline.animate({ left: `${clientX}px`, top: `${clientY}px` }, { duration: 500, fill: "forwards" });
+            });
+
+            // Tambahkan efek hover pada cursor saat diarahkan ke elemen interaktif
+            document.querySelectorAll('a, button').forEach(el => {
+                el.addEventListener('mouseenter', () => cursorOutline.classList.add('hover-effect'));
+                el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover-effect'));
+            });
+        }
+        
+        // --- SCROLL REVEAL ANIMATION ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Tambahkan delay dari style inline agar animasi berurutan
+                    const delay = parseInt(entry.target.style.transitionDelay) || 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, delay);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+    });
+    </script>
+</body>
+</html>
