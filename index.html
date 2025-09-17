@@ -75,7 +75,7 @@
         }
 
         /* =================================
-           HEADER / NAVIGATION
+           HEADER / NAVIGATION - UPDATED FOR RESPONSIVE
            ================================= */
         .header {
             position: sticky;
@@ -102,7 +102,7 @@
         }
         
         .nav-links {
-            display: flex;
+            display: none; /* Hidden by default, shown on larger screens */
             gap: 1.5rem;
             list-style: none;
         }
@@ -123,27 +123,60 @@
             border-bottom-color: var(--color-primary);
         }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.6rem 1.5rem;
-            border-radius: var(--radius-full);
-            border: 1px solid transparent;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-decoration: none;
-            transition: all 0.2s ease;
+        #menu-toggle {
+            display: block; /* Shown by default, hidden on larger screens */
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--color-text-primary);
             cursor: pointer;
         }
 
-        .btn-primary {
-            background-color: var(--color-primary);
-            color: white;
+        /* Mobile Menu Overlay */
+        #mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-in-out;
         }
-        
-        .btn-primary:hover {
-            background-color: var(--color-primary-dark);
+        #mobile-menu.open {
+            transform: translateY(0);
+        }
+        #menu-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--color-text-primary);
+            cursor: pointer;
+        }
+        .mobile-nav-links {
+            list-style: none;
+            text-align: center;
+        }
+        .mobile-nav-links li {
+            margin-bottom: 2rem;
+        }
+        .mobile-nav-links a {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            text-decoration: none;
+        }
+        .mobile-nav-links a.active {
+            color: var(--color-primary);
         }
 
         /* =================================
@@ -153,19 +186,13 @@
             text-align: center;
             padding: 4rem 0;
         }
-
         .hero h1 {
             font-size: 3rem;
             font-weight: 800;
             line-height: 1.2;
             letter-spacing: -0.05em;
-            color: var(--color-text-primary);
         }
-
-        .hero h1 .highlight {
-            color: var(--color-primary);
-        }
-
+        .hero h1 .highlight { color: var(--color-primary); }
         .hero p {
             margin-top: 1.5rem;
             font-size: 1.125rem;
@@ -174,11 +201,7 @@
             margin-left: auto;
             margin-right: auto;
         }
-        
-        .search-container {
-            margin: 2rem auto;
-            max-width: 500px;
-        }
+        .search-container { margin: 2rem auto; max-width: 500px; }
         .search-bar {
             background-color: var(--color-surface);
             border-radius: var(--radius-full);
@@ -193,10 +216,7 @@
             border-color: var(--color-primary);
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
         }
-        .search-bar i {
-            margin-right: 10px;
-            color: var(--color-text-secondary);
-        }
+        .search-bar i { margin-right: 10px; color: var(--color-text-secondary); }
         .search-bar input {
             border: none;
             background: transparent;
@@ -204,12 +224,10 @@
             width: 100%;
             font-size: 1rem;
         }
-        .search-bar input:focus {
-            outline: none;
-        }
+        .search-bar input:focus { outline: none; }
 
         /* =================================
-           PORTFOLIO GRID (Homepage)
+           PORTFOLIO GRID
            ================================= */
         .section-title {
             font-size: 2.25rem;
@@ -217,13 +235,11 @@
             text-align: center;
             margin-bottom: 3rem;
         }
-
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
         }
-
         .portfolio-card {
             background-color: var(--color-surface);
             border-radius: var(--radius-xl);
@@ -241,7 +257,7 @@
         }
         .card-preview {
             height: 0;
-            padding-bottom: 177.78%; /* 16:9 Portrait Aspect Ratio */
+            padding-bottom: 177.78%;
             overflow: hidden;
             position: relative;
             background-color: #f1f5f9;
@@ -255,13 +271,11 @@
             border: none;
             transform: scale(0.95);
             transform-origin: top center;
-            pointer-events: none; /* Mencegah interaksi dengan iframe */
+            pointer-events: none;
             opacity: 0.95;
             transition: opacity 0.3s ease;
         }
-        .portfolio-card:hover .card-preview iframe {
-            opacity: 1;
-        }
+        .portfolio-card:hover .card-preview iframe { opacity: 1; }
         .card-preview .preview-overlay {
             position: absolute;
             top: 0;
@@ -302,25 +316,17 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             aspect-ratio: 1 / 1;
         }
-        .gallery-item:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow-lg);
-        }
+        .gallery-item:hover { transform: scale(1.05); box-shadow: var(--shadow-lg); }
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
         }
-        #gallery-loader {
-            text-align: center;
-            font-size: 1.2rem;
-            color: var(--color-text-secondary);
-            padding: 2rem;
-        }
+        #gallery-loader { text-align: center; font-size: 1.2rem; color: var(--color-text-secondary); padding: 2rem; }
         
         /* =================================
-           WINNERS PAGE - UPDATED
+           WINNERS PAGE
            ================================= */
         .quiz-result-block {
             background-color: var(--color-surface);
@@ -343,11 +349,7 @@
             overflow: hidden;
             box-shadow: var(--shadow-md);
         }
-        .quiz-result-image img {
-            width: 100%;
-            display: block;
-        }
-
+        .quiz-result-image img { width: 100%; display: block; }
         .winners-podium {
             display: flex;
             justify-content: center;
@@ -356,7 +358,6 @@
             margin-top: 2rem;
             flex-wrap: wrap;
         }
-
         .winner-card {
             background-color: var(--color-surface);
             border-radius: var(--radius-xl);
@@ -369,112 +370,41 @@
             transition: transform 0.3s ease;
             background-color: #f8fafc;
         }
-        .winner-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .winner-card .place-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .winner-card .place-label {
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--color-text-secondary);
-            margin-bottom: 0.5rem;
-        }
-        .winner-card .winner-name {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--color-text-primary);
-        }
-        .winner-card .winner-score {
-            margin-top: 0.5rem;
-            font-size: 1.25rem;
-            font-weight: 500;
-            color: var(--color-secondary);
-        }
-
+        .winner-card:hover { transform: translateY(-10px); }
+        .winner-card .place-icon { font-size: 3.5rem; margin-bottom: 1rem; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .winner-card .place-label { font-size: 1rem; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 0.5rem; }
+        .winner-card .winner-name { font-size: 1.75rem; font-weight: 700; color: var(--color-text-primary); }
+        .winner-card .winner-score { margin-top: 0.5rem; font-size: 1.25rem; font-weight: 500; color: var(--color-secondary); }
         .winner-card.place-2 { order: 1; margin-bottom: 1rem; }
         .winner-card.place-1 { order: 2; margin-bottom: 3rem; transform: scale(1.1); z-index: 10;}
         .winner-card.place-3 { order: 3; }
-
-        .winner-card.place-1 .place-icon { color: #ffd700; } /* Gold */
-        .winner-card.place-2 .place-icon { color: #c0c0c0; } /* Silver */
-        .winner-card.place-3 .place-icon { color: #cd7f32; } /* Bronze */
+        .winner-card.place-1 .place-icon { color: #ffd700; }
+        .winner-card.place-2 .place-icon { color: #c0c0c0; }
+        .winner-card.place-3 .place-icon { color: #cd7f32; }
         
         /* =================================
            FOOTER
            ================================= */
-        .footer {
-            padding-top: 4rem;
-            padding-bottom: 2rem;
-            background-color: #e2e8f0; /* slate-200 */
-            border-top: 1px solid var(--border-color);
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-        @media (min-width: 768px) {
-            .footer-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-        .footer-column.about {
-            grid-column: span 2 / span 2;
-        }
-        @media (min-width: 1024px) {
-            .footer-column.about {
-                grid-column: span 1 / span 1;
-            }
-        }
-        .footer-logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--color-primary);
-        }
-        .footer p {
-            margin-top: 1rem;
-            color: var(--color-text-secondary);
-            font-size: 0.9rem;
-            max-width: 300px;
-        }
-        .footer-title {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--color-text-primary);
-            margin-bottom: 1rem;
-        }
-        .footer-links {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-        .footer-links a {
-            text-decoration: none;
-            color: var(--color-text-secondary);
-            font-size: 0.9rem;
-            transition: color 0.2s ease;
-        }
-        .footer-links a:hover {
-            color: var(--color-primary);
-        }
-        .footer-bottom {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #cbd5e1; /* slate-300 */
-            text-align: center;
-            font-size: 0.85rem;
-            color: var(--color-text-secondary);
-        }
+        .footer { padding: 4rem 2rem 2rem; background-color: #e2e8f0; border-top: 1px solid var(--border-color); }
+        .footer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        .footer-column.about { grid-column: span 2 / span 2; }
+        .footer-logo { font-size: 1.5rem; font-weight: 700; color: var(--color-primary); }
+        .footer p { margin-top: 1rem; color: var(--color-text-secondary); font-size: 0.9rem; max-width: 300px; }
+        .footer-title { font-weight: 600; font-size: 0.9rem; color: var(--color-text-primary); margin-bottom: 1rem; }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+        .footer-links a { text-decoration: none; color: var(--color-text-secondary); font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-links a:hover { color: var(--color-primary); }
+        .footer-bottom { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #cbd5e1; text-align: center; font-size: 0.85rem; color: var(--color-text-secondary); }
         
-        /* RESPONSIVE ADJUSTMENTS */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
+        /* RESPONSIVE MEDIA QUERIES */
+        @media (min-width: 768px) {
+            .nav-links { display: flex; }
+            #menu-toggle { display: none; }
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
+            .footer-column.about { grid-column: span 1 / span 1; }
+        }
+
+        @media (max-width: 767px) {
             .hero h1 { font-size: 2.5rem; }
             .section-title { font-size: 1.8rem; }
             .portfolio-grid { grid-template-columns: 1fr; }
@@ -500,6 +430,7 @@
             <a href="#" class="logo" data-page="home">
                 <img src="logoSAB.png" alt="Sekolah Al Bunyan Logo">
             </a>
+            <!-- Desktop Navigation -->
             <nav>
                 <ul class="nav-links">
                     <li><a href="#" class="nav-link active" data-page="home">Portofolio</a></li>
@@ -507,11 +438,24 @@
                     <li><a href="#" class="nav-link" data-page="pemenang">Pemenang Quiz</a></li>
                 </ul>
             </nav>
-            <div>
-                <a href="https://albunyan.sch.id/" target="_blank" class="btn btn-primary">Website Sekolah</a>
-            </div>
+            <!-- Mobile Menu Toggle -->
+            <button id="menu-toggle" aria-label="Buka Menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu">
+        <button id="menu-close" aria-label="Tutup Menu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="mobile-nav-links">
+            <li><a href="#" class="nav-link active" data-page="home">Portofolio</a></li>
+            <li><a href="#" class="nav-link" data-page="galeri">Galeri</a></li>
+            <li><a href="#" class="nav-link" data-page="pemenang">Pemenang Quiz</a></li>
+        </ul>
+    </div>
 
     <main>
         <!-- Homepage / Portofolio Page -->
@@ -527,10 +471,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="portfolio-grid" id="portfolio-grid">
-                    <!-- Kartu siswa akan diisi oleh JavaScript -->
-                </div>
+                <div class="portfolio-grid" id="portfolio-grid"></div>
             </div>
         </div>
 
@@ -538,9 +479,7 @@
         <div id="page-galeri" class="page hidden">
             <div class="container">
                 <h2 class="section-title">Galeri Kegiatan</h2>
-                <div class="gallery-grid" id="gallery-grid">
-                    <!-- Gambar akan dimuat oleh JavaScript -->
-                </div>
+                <div class="gallery-grid" id="gallery-grid"></div>
                 <div id="gallery-loader">
                     <i class="fas fa-spinner fa-spin"></i> Memuat gambar...
                 </div>
@@ -551,9 +490,7 @@
         <div id="page-pemenang" class="page hidden">
             <div class="container">
                 <h1 class="section-title">🏆 Papan Juara Quiz 🏆</h1>
-                <div id="winners-container">
-                    <!-- Konten Pemenang akan di-generate oleh JavaScript -->
-                </div>
+                <div id="winners-container"></div>
             </div>
         </div>
     </main>
@@ -594,21 +531,24 @@
     document.addEventListener('DOMContentLoaded', () => {
 
         // =================================
-        // PAGE NAVIGATION LOGIC
+        // PAGE & NAVIGATION LOGIC
         // =================================
-        const pageLinks = document.querySelectorAll('.nav-link');
+        const allNavLinks = document.querySelectorAll('.nav-link');
         const pages = document.querySelectorAll('.page');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
         
         function showPage(pageId) {
             pages.forEach(page => page.classList.add('hidden'));
             const activePage = document.getElementById(`page-${pageId}`);
             if (activePage) activePage.classList.remove('hidden');
 
-            pageLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.dataset.page === pageId) link.classList.add('active');
+            allNavLinks.forEach(link => {
+                link.classList.toggle('active', link.dataset.page === pageId);
             });
             window.scrollTo(0, 0);
+            mobileMenu.classList.remove('open'); // Close menu on navigation
         }
 
         document.body.addEventListener('click', (e) => {
@@ -623,6 +563,12 @@
                 showPage(logoLink.dataset.page);
             }
         });
+
+        // Mobile Menu Logic
+        if (menuToggle && mobileMenu && menuClose) {
+            menuToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
+            menuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+        }
 
         // =================================
         // PORTOFOLIO PAGE LOGIC
@@ -692,11 +638,11 @@
 
             const maxImages = 100;
             let imagesFound = 0;
+            let imagesChecked = 0;
             
             for (let i = 1; i <= maxImages; i++) {
                 const img = new Image();
                 const imageUrl = `${i}.png`;
-
                 img.onload = () => {
                     if (imagesFound === 0) loader.classList.add('hidden');
                     imagesFound++;
@@ -705,23 +651,18 @@
                     galleryItem.innerHTML = `<img src="${imageUrl}" alt="Galeri Foto ${i}" loading="lazy">`;
                     galleryGrid.appendChild(galleryItem);
                 };
-
-                img.onerror = (() => {
-                    let checkedCount = 0;
-                    return () => {
-                        checkedCount++;
-                        if (checkedCount === maxImages && imagesFound === 0) {
-                            loader.innerHTML = 'Belum ada foto di galeri.';
-                        }
-                    };
-                })();
-                
+                img.onerror = () => {
+                    imagesChecked++;
+                    if (imagesChecked === maxImages && imagesFound === 0) {
+                        loader.innerHTML = 'Belum ada foto di galeri.';
+                    }
+                };
                 img.src = imageUrl;
             }
         }
 
         // =================================
-        // WINNERS PAGE LOGIC - DYNAMIC
+        // WINNERS PAGE LOGIC
         // =================================
         const quizzes = [
             {
@@ -733,10 +674,7 @@
                     { place: 3, name: "Ihsan", score: "7065 Poin", icon: "fa-medal" }
                 ]
             },
-            // --- CARA MENAMBAH KUIS BARU ---
-            // 1. Buat file gambar baru (misal: quiz2.png)
-            // 2. Salin dan tempel blok kode di bawah ini
-            // 3. Ganti datanya sesuai kuis yang baru
+            // Anda bisa menambahkan data kuis baru di sini
             /*
             {
                 title: "Quiz Ekskul Programming #2",
@@ -753,7 +691,6 @@
         function renderWinners() {
             const container = document.getElementById('winners-container');
             if (!container) return;
-
             container.innerHTML = quizzes.map(quiz => {
                 const podiumHtml = quiz.winners.map(winner => `
                     <div class="winner-card place-${winner.place}">
@@ -763,18 +700,14 @@
                         <div class="winner-score">${winner.score}</div>
                     </div>
                 `).join('');
-
                 return `
                     <div class="quiz-result-block">
                         <h2 class="quiz-title">${quiz.title}</h2>
                         <div class="quiz-result-image">
-                            <img src="${quiz.image}" alt="Hasil ${quiz.title}">
+                            <img src="${quiz.image}" alt="Hasil ${quiz.title}" onerror="this.style.display='none'">
                         </div>
-                        <div class="winners-podium">
-                            ${podiumHtml}
-                        </div>
-                    </div>
-                `;
+                        <div class="winners-podium">${podiumHtml}</div>
+                    </div>`;
             }).join('');
         }
 
@@ -785,7 +718,6 @@
         setupSearch();
         renderGallery();
         renderWinners();
-
     });
     </script>
 </body>
