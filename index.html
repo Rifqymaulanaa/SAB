@@ -209,7 +209,7 @@
         }
 
         /* =================================
-           PORTFOLIO GRID (Homepage) - UPDATED
+           PORTFOLIO GRID (Homepage)
            ================================= */
         .section-title {
             font-size: 2.25rem;
@@ -320,14 +320,40 @@
         }
         
         /* =================================
-           WINNERS PAGE
+           WINNERS PAGE - UPDATED
            ================================= */
+        .quiz-result-block {
+            background-color: var(--color-surface);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+        .quiz-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .quiz-result-image {
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+        .quiz-result-image img {
+            width: 100%;
+            display: block;
+        }
+
         .winners-podium {
             display: flex;
             justify-content: center;
             align-items: flex-end;
             gap: 1rem;
-            margin-top: 4rem;
+            margin-top: 2rem;
             flex-wrap: wrap;
         }
 
@@ -341,6 +367,7 @@
             width: 280px;
             position: relative;
             transition: transform 0.3s ease;
+            background-color: #f8fafc;
         }
         .winner-card:hover {
             transform: translateY(-10px);
@@ -369,7 +396,6 @@
             color: var(--color-secondary);
         }
 
-        /* Podium order and styling */
         .winner-card.place-2 { order: 1; margin-bottom: 1rem; }
         .winner-card.place-1 { order: 2; margin-bottom: 3rem; transform: scale(1.1); z-index: 10;}
         .winner-card.place-3 { order: 3; }
@@ -448,18 +474,10 @@
         
         /* RESPONSIVE ADJUSTMENTS */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none; /* Simplification for this example. A real case would use a hamburger menu. */
-            }
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            .section-title {
-                font-size: 1.8rem;
-            }
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .section-title { font-size: 1.8rem; }
+            .portfolio-grid { grid-template-columns: 1fr; }
             .winners-podium {
                 flex-direction: column;
                 align-items: center;
@@ -470,7 +488,7 @@
                 margin-bottom: 0;
                 transform: scale(1);
             }
-            .winner-card.place-1 { order: -1; } /* Still show 1st place on top */
+            .winner-card.place-1 { order: -1; }
         }
     </style>
 </head>
@@ -532,29 +550,9 @@
         <!-- Winners Page -->
         <div id="page-pemenang" class="page hidden">
             <div class="container">
-                <h2 class="section-title">🏆 Pemenang Quiz Ekskul Programming 🏆</h2>
-                <div class="winners-podium">
-                    <!-- Card Juara 2 -->
-                    <div class="winner-card place-2">
-                        <div class="place-icon"><i class="fas fa-medal"></i></div>
-                        <div class="place-label">Juara 2</div>
-                        <div class="winner-name">acopep</div>
-                        <div class="winner-score">7681 Poin</div>
-                    </div>
-                    <!-- Card Juara 1 -->
-                    <div class="winner-card place-1">
-                        <div class="place-icon"><i class="fas fa-trophy"></i></div>
-                        <div class="place-label">Juara 1</div>
-                        <div class="winner-name">deexsoon</div>
-                        <div class="winner-score">7956 Poin</div>
-                    </div>
-                    <!-- Card Juara 3 -->
-                    <div class="winner-card place-3">
-                        <div class="place-icon"><i class="fas fa-medal"></i></div>
-                        <div class="place-label">Juara 3</div>
-                        <div class="winner-name">Ihsan</div>
-                        <div class="winner-score">7065 Poin</div>
-                    </div>
+                <h1 class="section-title">🏆 Papan Juara Quiz 🏆</h1>
+                <div id="winners-container">
+                    <!-- Konten Pemenang akan di-generate oleh JavaScript -->
                 </div>
             </div>
         </div>
@@ -602,38 +600,29 @@
         const pages = document.querySelectorAll('.page');
         
         function showPage(pageId) {
-            pages.forEach(page => {
-                page.classList.add('hidden');
-            });
+            pages.forEach(page => page.classList.add('hidden'));
             const activePage = document.getElementById(`page-${pageId}`);
-            if (activePage) {
-                activePage.classList.remove('hidden');
-            }
+            if (activePage) activePage.classList.remove('hidden');
 
             pageLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.dataset.page === pageId) {
-                    link.classList.add('active');
-                }
+                if (link.dataset.page === pageId) link.classList.add('active');
             });
-             window.scrollTo(0, 0);
+            window.scrollTo(0, 0);
         }
 
         document.body.addEventListener('click', (e) => {
-            if (e.target.matches('.nav-link') || e.target.closest('.nav-link')) {
+            const navLink = e.target.closest('.nav-link');
+            if (navLink) {
                 e.preventDefault();
-                const link = e.target.closest('.nav-link');
-                const pageId = link.dataset.page;
-                showPage(pageId);
+                showPage(navLink.dataset.page);
             }
-             if (e.target.matches('.logo') || e.target.closest('.logo')) {
+            const logoLink = e.target.closest('.logo');
+            if (logoLink) {
                 e.preventDefault();
-                const link = e.target.closest('.logo');
-                const pageId = link.dataset.page;
-                showPage(pageId);
+                showPage(logoLink.dataset.page);
             }
         });
-
 
         // =================================
         // PORTOFOLIO PAGE LOGIC
@@ -666,56 +655,29 @@
         function renderStudentCards() {
             const grid = document.getElementById('portfolio-grid');
             if (!grid) return;
-            grid.innerHTML = '';
-            
-            students.forEach((student) => {
-                const card = document.createElement('a');
+            grid.innerHTML = students.map(student => {
                 const isAvailable = student.url && student.url !== '#';
-                
-                card.href = isAvailable ? student.url : 'javascript:void(0);';
-                if (isAvailable) {
-                    card.target = '_blank';
-                    card.rel = 'noopener noreferrer';
-                }
-                
-                card.className = 'portfolio-card';
-                card.dataset.name = student.name;
-                
+                const href = isAvailable ? `href="${student.url}" target="_blank" rel="noopener noreferrer"` : 'href="javascript:void(0);"';
                 const previewHtml = isAvailable ? 
                     `<iframe src="${student.url}" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>` :
-                    `<div class="preview-overlay">
-                        <i class="fas fa-link-slash fa-2x"></i>
-                        <span>Proyek Belum Tersedia</span>
-                    </div>`;
-                
-                card.innerHTML = `
-                    <div class="card-preview">
-                        ${previewHtml}
-                    </div>
-                    <div class="card-content">
-                        <span class="student-name">${student.name}</span>
-                    </div>
-                `;
-                
-                grid.appendChild(card);
-            });
+                    `<div class="preview-overlay"><i class="fas fa-link-slash fa-2x"></i><span>Proyek Belum Tersedia</span></div>`;
+
+                return `
+                    <a ${href} class="portfolio-card" data-name="${student.name}">
+                        <div class="card-preview">${previewHtml}</div>
+                        <div class="card-content"><span class="student-name">${student.name}</span></div>
+                    </a>`;
+            }).join('');
         }
 
         function setupSearch() {
             const searchInput = document.getElementById('search-input');
             if (!searchInput) return;
-
             searchInput.addEventListener('input', () => {
                 const searchTerm = searchInput.value.toLowerCase();
-                const cards = document.querySelectorAll('.portfolio-card');
-                
-                cards.forEach(card => {
+                document.querySelectorAll('.portfolio-card').forEach(card => {
                     const name = card.dataset.name.toLowerCase();
-                    if (name.includes(searchTerm)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
+                    card.style.display = name.includes(searchTerm) ? 'block' : 'none';
                 });
             });
         }
@@ -730,16 +692,13 @@
 
             const maxImages = 100;
             let imagesFound = 0;
-            let imagesLoaded = 0;
             
             for (let i = 1; i <= maxImages; i++) {
                 const img = new Image();
                 const imageUrl = `${i}.png`;
 
                 img.onload = () => {
-                    if (imagesFound === 0) { // Sembunyikan loader saat gambar pertama ditemukan
-                        loader.classList.add('hidden');
-                    }
+                    if (imagesFound === 0) loader.classList.add('hidden');
                     imagesFound++;
                     const galleryItem = document.createElement('div');
                     galleryItem.className = 'gallery-item';
@@ -747,15 +706,76 @@
                     galleryGrid.appendChild(galleryItem);
                 };
 
-                img.onerror = () => {
-                    imagesLoaded++;
-                    if (imagesLoaded === maxImages && imagesFound === 0) {
-                        loader.innerHTML = 'Belum ada foto di galeri.';
-                    }
-                };
-
+                img.onerror = (() => {
+                    let checkedCount = 0;
+                    return () => {
+                        checkedCount++;
+                        if (checkedCount === maxImages && imagesFound === 0) {
+                            loader.innerHTML = 'Belum ada foto di galeri.';
+                        }
+                    };
+                })();
+                
                 img.src = imageUrl;
             }
+        }
+
+        // =================================
+        // WINNERS PAGE LOGIC - DYNAMIC
+        // =================================
+        const quizzes = [
+            {
+                title: "Quiz Ekskul Programming #1",
+                image: "quiz1.png",
+                winners: [
+                    { place: 1, name: "deexsoon", score: "7956 Poin", icon: "fa-trophy" },
+                    { place: 2, name: "acopep", score: "7681 Poin", icon: "fa-medal" },
+                    { place: 3, name: "Ihsan", score: "7065 Poin", icon: "fa-medal" }
+                ]
+            },
+            // --- CARA MENAMBAH KUIS BARU ---
+            // 1. Buat file gambar baru (misal: quiz2.png)
+            // 2. Salin dan tempel blok kode di bawah ini
+            // 3. Ganti datanya sesuai kuis yang baru
+            /*
+            {
+                title: "Quiz Ekskul Programming #2",
+                image: "quiz2.png",
+                winners: [
+                    { place: 1, name: "NamaJuara1", score: "XXXX Poin", icon: "fa-trophy" },
+                    { place: 2, name: "NamaJuara2", score: "XXXX Poin", icon: "fa-medal" },
+                    { place: 3, name: "NamaJuara3", score: "XXXX Poin", icon: "fa-medal" }
+                ]
+            },
+            */
+        ];
+
+        function renderWinners() {
+            const container = document.getElementById('winners-container');
+            if (!container) return;
+
+            container.innerHTML = quizzes.map(quiz => {
+                const podiumHtml = quiz.winners.map(winner => `
+                    <div class="winner-card place-${winner.place}">
+                        <div class="place-icon"><i class="fas ${winner.icon}"></i></div>
+                        <div class="place-label">Juara ${winner.place}</div>
+                        <div class="winner-name">${winner.name}</div>
+                        <div class="winner-score">${winner.score}</div>
+                    </div>
+                `).join('');
+
+                return `
+                    <div class="quiz-result-block">
+                        <h2 class="quiz-title">${quiz.title}</h2>
+                        <div class="quiz-result-image">
+                            <img src="${quiz.image}" alt="Hasil ${quiz.title}">
+                        </div>
+                        <div class="winners-podium">
+                            ${podiumHtml}
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
         // =================================
@@ -764,6 +784,7 @@
         renderStudentCards();
         setupSearch();
         renderGallery();
+        renderWinners();
 
     });
     </script>
