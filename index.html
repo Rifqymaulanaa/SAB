@@ -1,30 +1,36 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rifqy Maulana - Bio Link</title>
-    <!-- Ikon dari Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Font dari Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Portofolio Siswa - Sekolah Al Bunyan</title>
+    
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        /* --- START OF MODERN STYLES (Adapted from your file) --- */
-
+        /* =================================
+           RESET & GLOBAL STYLES (Inspired by CekatAI)
+           ================================= */
         :root {
-            /* Dark Theme Colors (Default) */
-            --bg-primary: #0D1117;
-            --bg-secondary-animated: #161B22;
-            --bg-card: rgba(22, 27, 34, 0.65); /* Slightly more transparent for bio link */
-            --border-color: rgba(240, 246, 252, 0.1);
-            --text-primary: #F0F6FC;
-            --text-secondary: #8B949E;
-            --accent-glow: rgba(59, 130, 246, 0.4); /* Blue glow as requested */
-            --accent-color: #3B82F6;
-
-            /* Universal Values */
-            --radius-lg: 16px;
-            --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --color-primary: #3b82f6; /* blue-500 */
+            --color-primary-dark: #2563eb; /* blue-600 */
+            --color-secondary: #64748b; /* slate-500 */
+            --color-background: #f8fafc; /* slate-50 */
+            --color-surface: #ffffff;
+            --color-text-primary: #1e293b; /* slate-800 */
+            --color-text-secondary: #475569; /* slate-600 */
+            --border-color: #e2e8f0; /* slate-200 */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-full: 9999px;
         }
 
         * {
@@ -38,272 +44,727 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            cursor: none; /* Hide default cursor for desktop */
-            
-            /* Animated Gradient Background */
-            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary-animated), var(--accent-color));
-            background-size: 400% 400%;
-            animation: subtleGradient 20s ease infinite;
-
-            /* Center content */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 40px 20px;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        @keyframes subtleGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .container {
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+        }
+
+        .hidden {
+            display: none !important;
         }
         
-        /* === INTERACTIVE BACKGROUND & CURSOR (Desktop Only) === */
-        #interactive-bg {
-            position: fixed;
+        .page {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* =================================
+           HEADER / NAVIGATION
+           ================================= */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 4.5rem;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 0.25rem;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.6rem 1.5rem;
+            border-radius: var(--radius-full);
+            border: 1px solid transparent;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--color-primary-dark);
+        }
+
+        /* =================================
+           HERO SECTION (Homepage)
+           ================================= */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.05em;
+            color: var(--color-text-primary);
+        }
+
+        .hero h1 .highlight {
+            color: var(--color-primary);
+        }
+
+        .hero p {
+            margin-top: 1.5rem;
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .search-container {
+            margin: 2rem auto;
+            max-width: 500px;
+        }
+        .search-bar {
+            background-color: var(--color-surface);
+            border-radius: var(--radius-full);
+            padding: 0.5rem 0.75rem 0.5rem 1.25rem;
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+        .search-bar:focus-within {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        .search-bar i {
+            margin-right: 10px;
+            color: var(--color-text-secondary);
+        }
+        .search-bar input {
+            border: none;
+            background: transparent;
+            color: var(--color-text-primary);
+            width: 100%;
+            font-size: 1rem;
+        }
+        .search-bar input:focus {
+            outline: none;
+        }
+
+        /* =================================
+           PORTFOLIO GRID (Homepage) - UPDATED
+           ================================= */
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-card {
+            background-color: var(--color-surface);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            box-shadow: var(--shadow-md);
+        }
+        .portfolio-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        .card-preview {
+            height: 0;
+            padding-bottom: 177.78%; /* 16:9 Portrait Aspect Ratio */
+            overflow: hidden;
+            position: relative;
+            background-color: #f1f5f9;
+        }
+        .card-preview iframe {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100vh;
-            background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), var(--accent-glow), transparent 80%);
-            z-index: -1;
-            pointer-events: none;
-            transition: background 0.2s ease-out;
+            height: 100%;
+            border: none;
+            transform: scale(0.95);
+            transform-origin: top center;
+            pointer-events: none; /* Mencegah interaksi dengan iframe */
+            opacity: 0.95;
+            transition: opacity 0.3s ease;
         }
-
-        .cursor {
-            position: fixed;
-            z-index: 9999;
-            pointer-events: none;
-            border-radius: 50%;
-            transition: transform 0.2s, width 0.3s, height 0.3s, opacity 0.3s, background-color 0.3s;
-            transform: translate(-50%, -50%);
-            display: none; /* Hidden by default, shown via JS on non-touch devices */
-        }
-
-        .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent-color);
-        }
-
-        .cursor-outline {
-            width: 40px;
-            height: 40px;
-            border: 2px solid rgba(59, 130, 246, 0.5);
-        }
-        
-        body:hover .cursor-outline.hover-effect {
-            width: 60px;
-            height: 60px;
-            background-color: rgba(59, 130, 246, 0.1);
-            border-color: rgba(59, 130, 246, 0.8);
-        }
-
-        /* Main Content Container */
-        .bio-container {
-            width: 100%;
-            max-width: 680px;
-            text-align: center;
-            padding: 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .profile-picture {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 4px solid var(--border-color);
-            margin-bottom: 20px;
-            object-fit: cover;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .username {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-
-        .user-handle {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 30px;
-        }
-
-        .links-container {
-            display: grid;
-            gap: 20px;
-        }
-
-        .link-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 18px 25px;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: var(--transition-smooth);
-            will-change: transform, box-shadow;
-            text-decoration: none;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 500;
-            font-size: 1.1rem;
-        }
-        
-        .link-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            border-color: rgba(59, 130, 246, 0.5);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-            color: #fff;
-        }
-
-        .link-card i {
-            font-size: 1.4rem;
-            margin-right: 15px;
-            width: 25px; /* To align text */
-            text-align: center;
-        }
-
-        /* Animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-        .reveal.visible {
+        .portfolio-card:hover .card-preview iframe {
             opacity: 1;
-            transform: translateY(0);
         }
-
-        .footer {
-            margin-top: 40px;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+        .card-preview .preview-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display:flex; 
+            align-items:center; 
+            justify-content:center; 
+            flex-direction: column;
+            gap: 0.5rem;
+            color: var(--color-text-secondary);
+            background-color: #e2e8f0;
         }
-        .footer a {
-            color: var(--accent-color);
-            text-decoration: none;
+        .card-content {
+            padding: 1.25rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+        .student-name {
             font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--color-text-primary);
+        }
+        
+        /* =================================
+           GALLERY PAGE
+           ================================= */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .gallery-item {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            aspect-ratio: 1 / 1;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        #gallery-loader {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--color-text-secondary);
+            padding: 2rem;
+        }
+        
+        /* =================================
+           WINNERS PAGE
+           ================================= */
+        .winners-podium {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 1rem;
+            margin-top: 4rem;
+            flex-wrap: wrap;
         }
 
-        /* Responsive Styles */
+        .winner-card {
+            background-color: var(--color-surface);
+            border-radius: var(--radius-xl);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-lg);
+            width: 280px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .winner-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .winner-card .place-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .winner-card .place-label {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        .winner-card .winner-name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+        .winner-card .winner-score {
+            margin-top: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--color-secondary);
+        }
+
+        /* Podium order and styling */
+        .winner-card.place-2 { order: 1; margin-bottom: 1rem; }
+        .winner-card.place-1 { order: 2; margin-bottom: 3rem; transform: scale(1.1); z-index: 10;}
+        .winner-card.place-3 { order: 3; }
+
+        .winner-card.place-1 .place-icon { color: #ffd700; } /* Gold */
+        .winner-card.place-2 .place-icon { color: #c0c0c0; } /* Silver */
+        .winner-card.place-3 .place-icon { color: #cd7f32; } /* Bronze */
+        
+        /* =================================
+           FOOTER
+           ================================= */
+        .footer {
+            padding-top: 4rem;
+            padding-bottom: 2rem;
+            background-color: #e2e8f0; /* slate-200 */
+            border-top: 1px solid var(--border-color);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        .footer-column.about {
+            grid-column: span 2 / span 2;
+        }
+        @media (min-width: 1024px) {
+            .footer-column.about {
+                grid-column: span 1 / span 1;
+            }
+        }
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+        .footer p {
+            margin-top: 1rem;
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            max-width: 300px;
+        }
+        .footer-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--color-text-primary);
+            margin-bottom: 1rem;
+        }
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .footer-links a {
+            text-decoration: none;
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+        .footer-links a:hover {
+            color: var(--color-primary);
+        }
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #cbd5e1; /* slate-300 */
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+        }
+        
+        /* RESPONSIVE ADJUSTMENTS */
         @media (max-width: 768px) {
-            .cursor { display: none !important; }
-            body { cursor: auto; }
-            .link-card { cursor: pointer; }
-            .username { font-size: 1.8rem; }
-            .profile-picture { width: 100px; height: 100px; }
+            .nav-links {
+                display: none; /* Simplification for this example. A real case would use a hamburger menu. */
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            .winners-podium {
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+            }
+            .winner-card.place-1, .winner-card.place-2, .winner-card.place-3 {
+                order: 0;
+                margin-bottom: 0;
+                transform: scale(1);
+            }
+            .winner-card.place-1 { order: -1; } /* Still show 1st place on top */
         }
     </style>
 </head>
 <body>
-    <!-- Interactive Background & Cursor Elements (Desktop Only) -->
-    <div id="interactive-bg"></div>
-    <div class="cursor cursor-dot"></div>
-    <div class="cursor cursor-outline"></div>
 
-    <main class="bio-container">
-        <img src="https://randomuser.me/api/portraits/men/15.jpg" alt="Foto Profil Rifqy Maulana" class="profile-picture reveal">
-        <h1 class="username reveal">Rifqy Maulana</h1>
-        <p class="user-handle reveal">Digital Enthusiast & Developer</p>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <a href="#" class="logo" data-page="home">
+                <img src="logoSAB.png" alt="Sekolah Al Bunyan Logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link active" data-page="home">Portofolio</a></li>
+                    <li><a href="#" class="nav-link" data-page="galeri">Galeri</a></li>
+                    <li><a href="#" class="nav-link" data-page="pemenang">Pemenang Quiz</a></li>
+                </ul>
+            </nav>
+            <div>
+                <a href="https://albunyan.sch.id/" target="_blank" class="btn btn-primary">Website Sekolah</a>
+            </div>
+        </div>
+    </header>
 
-        <div class="links-container">
-            <!-- WhatsApp -->
-            <a href="https://wa.me/6289621810307" target="_blank" class="link-card reveal" style="transition-delay: 100ms;">
-                <i class="fa-brands fa-whatsapp"></i>
-                <span>0896 2181 0307</span>
-            </a>
-            <!-- Instagram -->
-            <a href="https://instagram.com/rifqymaulanaa15" target="_blank" class="link-card reveal" style="transition-delay: 200ms;">
-                <i class="fa-brands fa-instagram"></i>
-                <span>@rifqymaulanaa15</span>
-            </a>
-            <!-- TikTok -->
-            <a href="https://www.tiktok.com/@rifqymaulanaa15" target="_blank" class="link-card reveal" style="transition-delay: 300ms;">
-                <i class="fa-brands fa-tiktok"></i>
-                <span>@rifqymaulanaa15</span>
-            </a>
-            <!-- GitHub -->
-            <a href="https://github.com/Rifqymaulanaa" target="_blank" class="link-card reveal" style="transition-delay: 400ms;">
-                <i class="fa-brands fa-github"></i>
-                <span>Rifqymaulanaa</span>
-            </a>
-            <!-- LinkedIn (Ganti # dengan URL LinkedIn Anda) -->
-            <a href="#" target="_blank" class="link-card reveal" style="transition-delay: 500ms;">
-                <i class="fa-brands fa-linkedin"></i>
-                <span>LinkedIn Profile</span>
-            </a>
-            <!-- Website Pribadi -->
-            <a href="https://rifqymaulana.com" target="_blank" class="link-card reveal" style="transition-delay: 600ms;">
-                <i class="fa-solid fa-globe"></i>
-                <span>rifqymaulana.com</span>
-            </a>
+    <main>
+        <!-- Homepage / Portofolio Page -->
+        <div id="page-home" class="page">
+            <div class="container">
+                <div class="hero">
+                    <h1>Portofolio Digital <span class="highlight">Karya Siswa</span></h1>
+                    <p>Jelajahi kreativitas dan hasil karya luar biasa dari para siswa Sekolah Al Bunyan. Setiap proyek adalah cerminan dedikasi dan pembelajaran.</p>
+                     <div class="search-container">
+                        <div class="search-bar">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Cari nama siswa..." id="search-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-grid" id="portfolio-grid">
+                    <!-- Kartu siswa akan diisi oleh JavaScript -->
+                </div>
+            </div>
         </div>
 
-        <footer class="footer reveal" style="transition-delay: 700ms;">
-            <p>&copy; 2025 Rifqy Maulana. Dibuat dengan <i class="fa-solid fa-heart" style="color: #e25555;"></i></p>
-        </footer>
+        <!-- Gallery Page -->
+        <div id="page-galeri" class="page hidden">
+            <div class="container">
+                <h2 class="section-title">Galeri Kegiatan</h2>
+                <div class="gallery-grid" id="gallery-grid">
+                    <!-- Gambar akan dimuat oleh JavaScript -->
+                </div>
+                <div id="gallery-loader">
+                    <i class="fas fa-spinner fa-spin"></i> Memuat gambar...
+                </div>
+            </div>
+        </div>
+
+        <!-- Winners Page -->
+        <div id="page-pemenang" class="page hidden">
+            <div class="container">
+                <h2 class="section-title">🏆 Pemenang Quiz Ekskul Programming 🏆</h2>
+                <div class="winners-podium">
+                    <!-- Card Juara 2 -->
+                    <div class="winner-card place-2">
+                        <div class="place-icon"><i class="fas fa-medal"></i></div>
+                        <div class="place-label">Juara 2</div>
+                        <div class="winner-name">acopep</div>
+                        <div class="winner-score">7681 Poin</div>
+                    </div>
+                    <!-- Card Juara 1 -->
+                    <div class="winner-card place-1">
+                        <div class="place-icon"><i class="fas fa-trophy"></i></div>
+                        <div class="place-label">Juara 1</div>
+                        <div class="winner-name">deexsoon</div>
+                        <div class="winner-score">7956 Poin</div>
+                    </div>
+                    <!-- Card Juara 3 -->
+                    <div class="winner-card place-3">
+                        <div class="place-icon"><i class="fas fa-medal"></i></div>
+                        <div class="place-label">Juara 3</div>
+                        <div class="winner-name">Ihsan</div>
+                        <div class="winner-score">7065 Poin</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column about">
+                    <div class="footer-logo">Sekolah Al Bunyan</div>
+                    <p>Membentuk generasi yang berakhlak mulia, cerdas, dan kreatif melalui pendidikan berkualitas.</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Navigasi</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" class="nav-link" data-page="home">Portofolio</a></li>
+                        <li><a href="#" class="nav-link" data-page="galeri">Galeri</a></li>
+                        <li><a href="#" class="nav-link" data-page="pemenang">Pemenang Quiz</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                     <h3 class="footer-title">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://albunyan.sch.id/" target="_blank">Website Utama</a></li>
+                        <li><a href="https://albunyan.sch.id/kontak/" target="_blank">Kontak</a></li>
+                        <li><a href="https://albunyan.sch.id/ppdb/" target="_blank">PPDB</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2024 Sekolah Al Bunyan. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    document.addEventListener('DOMContentLoaded', () => {
 
-        // --- INTERACTIVE BACKGROUND & CURSOR (Desktop Only) ---
-        if (!isTouchDevice) {
-            const cursorDot = document.querySelector('.cursor-dot');
-            const cursorOutline = document.querySelector('.cursor-outline');
-
-            cursorDot.style.display = 'block';
-            cursorOutline.style.display = 'block';
-
-            window.addEventListener('mousemove', (e) => {
-                const { clientX, clientY } = e;
-                // Update posisi untuk radial gradient background
-                document.documentElement.style.setProperty('--mouse-x', `${clientX}px`);
-                document.documentElement.style.setProperty('--mouse-y', `${clientY}px`);
-                
-                // Update posisi untuk custom cursor
-                cursorDot.style.left = `${clientX}px`;
-                cursorDot.style.top = `${clientY}px`;
-                cursorOutline.animate({ left: `${clientX}px`, top: `${clientY}px` }, { duration: 500, fill: "forwards" });
+        // =================================
+        // PAGE NAVIGATION LOGIC
+        // =================================
+        const pageLinks = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page');
+        
+        function showPage(pageId) {
+            pages.forEach(page => {
+                page.classList.add('hidden');
             });
+            const activePage = document.getElementById(`page-${pageId}`);
+            if (activePage) {
+                activePage.classList.remove('hidden');
+            }
 
-            // Tambahkan efek hover pada cursor saat diarahkan ke elemen interaktif
-            document.querySelectorAll('a, button').forEach(el => {
-                el.addEventListener('mouseenter', () => cursorOutline.classList.add('hover-effect'));
-                el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover-effect'));
+            pageLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.page === pageId) {
+                    link.classList.add('active');
+                }
+            });
+             window.scrollTo(0, 0);
+        }
+
+        document.body.addEventListener('click', (e) => {
+            if (e.target.matches('.nav-link') || e.target.closest('.nav-link')) {
+                e.preventDefault();
+                const link = e.target.closest('.nav-link');
+                const pageId = link.dataset.page;
+                showPage(pageId);
+            }
+             if (e.target.matches('.logo') || e.target.closest('.logo')) {
+                e.preventDefault();
+                const link = e.target.closest('.logo');
+                const pageId = link.dataset.page;
+                showPage(pageId);
+            }
+        });
+
+
+        // =================================
+        // PORTOFOLIO PAGE LOGIC
+        // =================================
+        const students = [
+            { name: "Muhammad Dzaki Ahza Alsyahmi", url: "https://amigege.github.io/Alsyahmi/" },
+            { name: "Muhammad Fachry Octaviano", url: "https://octavianomuhammadfachry-cmyk.github.io/mauhajar/" },
+            { name: "Ihsan Khairul Nabil", url: "https://ihsan-khairul.github.io/ihsannabil/" },
+            { name: "Raffa Kautsar Rabbani", url: "#" },
+            { name: "Asyraf Fairuz Rajendra Rimosan", url: "https://asyrafrimosan-lang.github.io/papua-kww/" },
+            { name: "Giyanlukii Fisa Syahizra", url: "#" },
+            { name: "Muhammad Bagas Asadil Azzam Batubara", url: "#" },
+            { name: "Saifullah Akbar Ar-Rashid P", url: "#" },
+            { name: "Muhammad Fahim Jamaluddin", url: "https://fahimjamaluddin.github.io/bio/" },
+            { name: "Abdurrahman", url: "https://deexsoon.github.io/pixelbio2/" },
+            { name: "Hario Aditya Prianbodo", url: "https://riooow20.github.io/Riooo/" },
+            { name: "Fajri Muhammad Ridwan", url: "https://xierenn.github.io/myBio/" },
+            { name: "Muhammad Dwi Faiz Ilham", url: "https://faizilhamdwi-cyber.github.io/FAIZ-ILHAM/" },
+            { name: "Nayotama Rakha Alrifsi", url: "#" },
+            { name: "Raffa Apriliano Habib", url: "https://rapa28.github.io/Raffa-Lost-In-Tambun./" },
+            { name: "Kalvin", url: "#" },
+            { name: "M Ahnaf", url: "https://maulawiahnaf12.github.io/muhajierrr/#" },
+            { name: "Muhammad Zaenal Muttaqien", url: "https://zaeinn333.github.io/Muhammad-zenn/" },
+            { name: "Zaki Adi Putra", url: "#" },
+            { name: "Luthfi Fadhil Nurghozah", url: "#" },
+            { name: "Nurmajid Ahmad Hasan", url: "https://nurmajidahmad43-blip.github.io/linkinbioo/" },
+            { name: "Ahmad Rozin", url: "https://ahmadrozin20.github.io/ojinnn/" }
+        ];
+
+        function renderStudentCards() {
+            const grid = document.getElementById('portfolio-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            
+            students.forEach((student) => {
+                const card = document.createElement('a');
+                const isAvailable = student.url && student.url !== '#';
+                
+                card.href = isAvailable ? student.url : 'javascript:void(0);';
+                if (isAvailable) {
+                    card.target = '_blank';
+                    card.rel = 'noopener noreferrer';
+                }
+                
+                card.className = 'portfolio-card';
+                card.dataset.name = student.name;
+                
+                const previewHtml = isAvailable ? 
+                    `<iframe src="${student.url}" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>` :
+                    `<div class="preview-overlay">
+                        <i class="fas fa-link-slash fa-2x"></i>
+                        <span>Proyek Belum Tersedia</span>
+                    </div>`;
+                
+                card.innerHTML = `
+                    <div class="card-preview">
+                        ${previewHtml}
+                    </div>
+                    <div class="card-content">
+                        <span class="student-name">${student.name}</span>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('search-input');
+            if (!searchInput) return;
+
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                const cards = document.querySelectorAll('.portfolio-card');
+                
+                cards.forEach(card => {
+                    const name = card.dataset.name.toLowerCase();
+                    if (name.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
             });
         }
         
-        // --- SCROLL REVEAL ANIMATION ---
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Tambahkan delay dari style inline agar animasi berurutan
-                    const delay = parseInt(entry.target.style.transitionDelay) || 0;
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, delay);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
+        // =================================
+        // GALLERY PAGE LOGIC
+        // =================================
+        function renderGallery() {
+            const galleryGrid = document.getElementById('gallery-grid');
+            const loader = document.getElementById('gallery-loader');
+            if (!galleryGrid || !loader) return;
 
-        revealElements.forEach(el => revealObserver.observe(el));
+            const maxImages = 100;
+            let imagesFound = 0;
+            let imagesLoaded = 0;
+            
+            for (let i = 1; i <= maxImages; i++) {
+                const img = new Image();
+                const imageUrl = `${i}.png`;
+
+                img.onload = () => {
+                    if (imagesFound === 0) { // Sembunyikan loader saat gambar pertama ditemukan
+                        loader.classList.add('hidden');
+                    }
+                    imagesFound++;
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+                    galleryItem.innerHTML = `<img src="${imageUrl}" alt="Galeri Foto ${i}" loading="lazy">`;
+                    galleryGrid.appendChild(galleryItem);
+                };
+
+                img.onerror = () => {
+                    imagesLoaded++;
+                    if (imagesLoaded === maxImages && imagesFound === 0) {
+                        loader.innerHTML = 'Belum ada foto di galeri.';
+                    }
+                };
+
+                img.src = imageUrl;
+            }
+        }
+
+        // =================================
+        // INITIALIZE APP
+        // =================================
+        renderStudentCards();
+        setupSearch();
+        renderGallery();
+
     });
     </script>
 </body>
