@@ -11,42 +11,86 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* CSS-nya sama persis dengan index.html, namun ditambahkan style khusus galeri */
-        :root { /* ... (salin semua :root dari index.html) ... */ }
+        /* Global Styles */
+        :root {
+            --color-primary: #3b82f6;
+            --color-background: #f8fafc;
+            --color-surface: #ffffff;
+            --color-text-primary: #1e293b;
+            --color-text-secondary: #475569;
+            --border-color: #e2e8f0;
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --radius-lg: 0.75rem;
+            --radius-full: 9999px;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; padding-top: 7rem; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            padding-top: 7rem;
+        }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 1.25rem; }
-        .page { padding-bottom: 4rem; animation: fadeIn 0.5s ease-in-out; }
+        .page { padding-top: 4rem; padding-bottom: 4rem; animation: fadeIn 0.5s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* HEADER / NAVIGATION (SAMA DENGAN INDEX.HTML) */
-        .header { position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%); z-index: 50; width: 95%; max-width: 800px; background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid #e2e8f0; transition: all 0.3s ease; border-radius: 9999px; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        /* Floating Header */
+        .header {
+            position: fixed;
+            top: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            width: 95%;
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
+            box-shadow: var(--shadow-lg);
+        }
         .header-content { display: flex; justify-content: space-between; align-items: center; height: 4.5rem; padding: 0 1.5rem; }
-        .logo img { height: 36px; width: auto; }
+        .logo img { height: 36px; }
         .nav-links { display: none; gap: 1.5rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: #475569; font-weight: 500; padding: 0.5rem; border-radius: 9999px; transition: all 0.2s ease; }
-        .nav-links a:hover { color: #3b82f6; background-color: #f1f5f9; }
-        .nav-links a.active { color: #ffffff; background-color: #3b82f6; }
-        #menu-toggle { display: block; background: none; border: none; font-size: 1.5rem; color: #1e293b; cursor: pointer; }
-        #mobile-menu { /* ... (salin dari index.html) ... */ }
-        /* ... (salin semua style mobile menu dari index.html) ... */
+        .nav-links a { text-decoration: none; color: var(--color-text-secondary); font-weight: 500; padding: 0.5rem; border-radius: var(--radius-full); transition: all 0.2s ease; }
+        .nav-links a:hover { color: var(--color-primary); background-color: #f1f5f9; }
+        .nav-links a.active { color: var(--color-surface); background-color: var(--color-primary); }
+        #menu-toggle { display: block; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
 
-        /* GALLERY PAGE */
+        /* Mobile Menu */
+        #mobile-menu { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); z-index: 1000; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: translateY(-100%); transition: transform 0.3s ease-in-out; }
+        #mobile-menu.open { transform: translateY(0); }
+        #menu-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; }
+        .mobile-nav-links { list-style: none; text-align: center; }
+        .mobile-nav-links li { margin-bottom: 2rem; }
+        .mobile-nav-links a { font-size: 1.5rem; font-weight: 600; text-decoration: none; color: var(--color-text-primary); }
+        .mobile-nav-links a.active { color: var(--color-primary); }
+        
+        /* Gallery Page */
         .section-title { font-size: 2.25rem; font-weight: 700; text-align: center; margin-bottom: 3rem; }
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
-        .gallery-item { border-radius: 0.75rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; aspect-ratio: 1 / 1; }
-        .gallery-item:hover { transform: scale(1.05); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        .gallery-item { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); transition: transform 0.3s ease, box-shadow 0.3s ease; aspect-ratio: 1 / 1; }
+        .gallery-item:hover { transform: scale(1.05); box-shadow: var(--shadow-lg); }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        #gallery-loader { text-align: center; font-size: 1.2rem; color: #475569; padding: 2rem; }
+        #gallery-loader { text-align: center; font-size: 1.2rem; color: var(--color-text-secondary); padding: 2rem; }
         
-        /* FOOTER (SAMA DENGAN INDEX.HTML) */
-        .footer { padding: 4rem 2rem 2rem; background-color: #e2e8f0; border-top: 1px solid #e2e8f0; margin-top: 4rem; }
-        /* ... (salin semua style footer dari index.html) ... */
+        /* Footer */
+        .footer { padding: 4rem 2rem 2rem; background-color: #e2e8f0; border-top: 1px solid var(--border-color); margin-top: 4rem; }
+        .footer-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+        .footer-logo { font-size: 1.5rem; font-weight: 700; color: var(--color-primary); }
+        .footer p { margin-top: 1rem; color: var(--color-text-secondary); font-size: 0.9rem; max-width: 300px; }
+        .footer-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 1rem; }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+        .footer-links a { text-decoration: none; color: var(--color-text-secondary); font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-links a:hover { color: var(--color-primary); }
+        .footer-bottom { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #cbd5e1; text-align: center; font-size: 0.85rem; color: var(--color-text-secondary); }
         
-        /* RESPONSIVE (SAMA DENGAN INDEX.HTML) */
-        @media (min-width: 768px) { .nav-links { display: flex; } #menu-toggle { display: none; } /* ... */ }
-        @media (max-width: 767px) { /* ... */ }
+        /* Responsive */
+        @media (min-width: 640px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 768px) { .nav-links { display: flex; } #menu-toggle { display: none; } .footer-grid { grid-template-columns: repeat(4, 1fr); } }
+        @media (max-width: 767px) { .section-title { font-size: 1.8rem; } .header { width: 90%; top: 1rem; } body { padding-top: 6rem; } }
     </style>
 </head>
 <body>
@@ -63,12 +107,12 @@
                     <li><a href="quiz.html">Pemenang Quiz</a></li>
                 </ul>
             </nav>
-            <button id="menu-toggle" aria-label="Buka Menu"><i class="fas fa-bars"></i></button>
+            <button id="menu-toggle"><i class="fas fa-bars"></i></button>
         </div>
     </header>
 
     <div id="mobile-menu">
-        <button id="menu-close" aria-label="Tutup Menu"><i class="fas fa-times"></i></button>
+        <button id="menu-close"><i class="fas fa-times"></i></button>
         <ul class="mobile-nav-links">
             <li><a href="index.html">Portofolio</a></li>
             <li><a href="galeri.html" class="active">Galeri</a></li>
@@ -89,7 +133,32 @@
     </main>
 
     <footer class="footer">
-        </footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">Sekolah Al Bunyan</div>
+                    <p>Membentuk generasi yang berakhlak mulia, cerdas, dan kreatif melalui pendidikan berkualitas.</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Navigasi</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Portofolio</a></li>
+                        <li><a href="galeri.html">Galeri</a></li>
+                        <li><a href="quiz.html">Pemenang Quiz</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                     <h3 class="footer-title">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://albunyan.sch.id/" target="_blank">Website Utama</a></li>
+                        <li><a href="https://albunyan.sch.id/kontak/" target="_blank">Kontak</a></li>
+                        <li><a href="https://albunyan.sch.id/ppdb/" target="_blank">PPDB</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom"> &copy; 2024 Sekolah Al Bunyan. All rights reserved. </div>
+        </div>
+    </footer>
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -97,44 +166,33 @@
         const mobileMenu = document.getElementById('mobile-menu');
         const menuToggle = document.getElementById('menu-toggle');
         const menuClose = document.getElementById('menu-close');
-        if (menuToggle && mobileMenu && menuClose) {
-            menuToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
-            menuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
-        }
+        menuToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
+        menuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
 
-        // GALLERY PAGE LOGIC
-        function renderGallery() {
-            const galleryGrid = document.getElementById('gallery-grid');
-            const loader = document.getElementById('gallery-loader');
-            if (!galleryGrid || !loader) return;
-
-            const maxImages = 100;
-            let imagesFound = 0;
-            let imagesChecked = 0;
-            
-            for (let i = 1; i <= maxImages; i++) {
-                const img = new Image();
-                const imageUrl = `${i}.png`; // Asumsi gambar bernama 1.png, 2.png, dst.
-                img.onload = () => {
-                    if (imagesFound === 0) loader.style.display = 'none';
-                    imagesFound++;
-                    const galleryItem = document.createElement('div');
-                    galleryItem.className = 'gallery-item';
-                    galleryItem.innerHTML = `<img src="${imageUrl}" alt="Galeri Foto ${i}" loading="lazy">`;
-                    galleryGrid.appendChild(galleryItem);
-                };
-                img.onerror = () => {
-                    imagesChecked++;
-                    if (imagesChecked === maxImages && imagesFound === 0) {
-                        loader.innerHTML = 'Belum ada foto di galeri.';
-                    }
-                };
-                img.src = imageUrl;
-            }
-        }
+        // Gallery Logic
+        const galleryGrid = document.getElementById('gallery-grid');
+        const loader = document.getElementById('gallery-loader');
+        const maxImages = 100;
+        let imagesFound = 0;
         
-        // INITIALIZE APP
-        renderGallery();
+        for (let i = 1; i <= maxImages; i++) {
+            const img = new Image();
+            const imageUrl = `${i}.png`;
+            img.onload = () => {
+                if (imagesFound === 0) loader.style.display = 'none';
+                imagesFound++;
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                galleryItem.innerHTML = `<img src="${imageUrl}" alt="Galeri Foto ${i}" loading="lazy">`;
+                galleryGrid.appendChild(galleryItem);
+            };
+            img.onerror = () => {
+                if (i === maxImages && imagesFound === 0) {
+                    loader.innerHTML = 'Belum ada foto di galeri.';
+                }
+            };
+            img.src = imageUrl;
+        }
     });
     </script>
 </body>
