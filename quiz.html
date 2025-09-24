@@ -11,32 +11,77 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* CSS-nya sama persis dengan index.html, namun ditambahkan style khusus pemenang */
-        :root { /* ... (salin semua :root dari index.html) ... */ }
+        /* Global Styles */
+        :root {
+            --color-primary: #3b82f6;
+            --color-secondary: #64748b;
+            --color-background: #f8fafc;
+            --color-surface: #ffffff;
+            --color-text-primary: #1e293b;
+            --color-text-secondary: #475569;
+            --border-color: #e2e8f0;
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --radius-xl: 1rem;
+            --radius-lg: 0.75rem;
+            --radius-full: 9999px;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; padding-top: 7rem; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            padding-top: 7rem;
+        }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 1.25rem; }
-        .page { padding-bottom: 4rem; animation: fadeIn 0.5s ease-in-out; }
+        .page { padding-top: 4rem; padding-bottom: 4rem; animation: fadeIn 0.5s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* HEADER / NAVIGATION (SAMA DENGAN INDEX.HTML) */
-        .header { position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%); z-index: 50; width: 95%; max-width: 800px; background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid #e2e8f0; transition: all 0.3s ease; border-radius: 9999px; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
-        /* ... (salin semua style header & mobile menu dari index.html) ... */
+        /* Floating Header */
+        .header {
+            position: fixed;
+            top: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            width: 95%;
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
+            box-shadow: var(--shadow-lg);
+        }
+        .header-content { display: flex; justify-content: space-between; align-items: center; height: 4.5rem; padding: 0 1.5rem; }
+        .logo img { height: 36px; }
+        .nav-links { display: none; gap: 1.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--color-text-secondary); font-weight: 500; padding: 0.5rem; border-radius: var(--radius-full); transition: all 0.2s ease; }
+        .nav-links a:hover { color: var(--color-primary); background-color: #f1f5f9; }
+        .nav-links a.active { color: var(--color-surface); background-color: var(--color-primary); }
+        #menu-toggle { display: block; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
 
-        /* WINNERS PAGE */
+        /* Mobile Menu */
+        #mobile-menu { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); z-index: 1000; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: translateY(-100%); transition: transform 0.3s ease-in-out; }
+        #mobile-menu.open { transform: translateY(0); }
+        #menu-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; }
+        .mobile-nav-links { list-style: none; text-align: center; }
+        .mobile-nav-links li { margin-bottom: 2rem; }
+        .mobile-nav-links a { font-size: 1.5rem; font-weight: 600; text-decoration: none; color: var(--color-text-primary); }
+        .mobile-nav-links a.active { color: var(--color-primary); }
+        
+        /* Winners Page */
         .section-title { font-size: 2.25rem; font-weight: 700; text-align: center; margin-bottom: 3rem; }
-        .quiz-result-block { background-color: #ffffff; border-radius: 1rem; padding: 2rem; margin-bottom: 3rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); border: 1px solid #e2e8f0; }
+        .quiz-result-block { background-color: var(--color-surface); border-radius: var(--radius-xl); padding: 2rem; margin-bottom: 3rem; box-shadow: var(--shadow-md); border: 1px solid var(--border-color); }
         .quiz-title { font-size: 1.8rem; font-weight: 700; text-align: center; margin-bottom: 2rem; }
-        .quiz-result-image { max-width: 800px; margin: 0 auto 2rem auto; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+        .quiz-result-image { max-width: 800px; margin: 0 auto 2rem auto; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); }
         .quiz-result-image img { width: 100%; display: block; }
         .winners-podium { display: flex; justify-content: center; align-items: flex-end; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
-        .winner-card { background-color: #f8fafc; border-radius: 1rem; padding: 2rem 1.5rem; text-align: center; border: 1px solid #e2e8f0; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); width: 280px; position: relative; transition: transform 0.3s ease; }
+        .winner-card { background-color: var(--color-background); border-radius: var(--radius-xl); padding: 2rem 1.5rem; text-align: center; border: 1px solid var(--border-color); box-shadow: var(--shadow-lg); width: 280px; position: relative; transition: transform 0.3s ease; }
         .winner-card:hover { transform: translateY(-10px); }
-        .winner-card .place-icon { font-size: 3.5rem; margin-bottom: 1rem; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .winner-card .place-label { font-size: 1rem; font-weight: 500; color: #475569; margin-bottom: 0.5rem; }
-        .winner-card .winner-name { font-size: 1.75rem; font-weight: 700; color: #1e293b; }
-        .winner-card .winner-score { margin-top: 0.5rem; font-size: 1.25rem; font-weight: 500; color: #64748b; }
+        .winner-card .place-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+        .winner-card .winner-name { font-size: 1.75rem; font-weight: 700; }
+        .winner-card .winner-score { margin-top: 0.5rem; font-size: 1.25rem; font-weight: 500; color: var(--color-secondary); }
         .winner-card.place-2 { order: 1; margin-bottom: 1rem; }
         .winner-card.place-1 { order: 2; margin-bottom: 3rem; transform: scale(1.1); z-index: 10;}
         .winner-card.place-3 { order: 3; }
@@ -44,13 +89,24 @@
         .winner-card.place-2 .place-icon { color: #c0c0c0; }
         .winner-card.place-3 .place-icon { color: #cd7f32; }
         
-        /* FOOTER (SAMA DENGAN INDEX.HTML) */
-        .footer { padding: 4rem 2rem 2rem; background-color: #e2e8f0; border-top: 1px solid #e2e8f0; margin-top: 4rem; }
-        /* ... (salin semua style footer dari index.html) ... */
+        /* Footer */
+        .footer { padding: 4rem 2rem 2rem; background-color: #e2e8f0; border-top: 1px solid var(--border-color); margin-top: 4rem; }
+        .footer-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+        .footer-logo { font-size: 1.5rem; font-weight: 700; color: var(--color-primary); }
+        .footer p { margin-top: 1rem; color: var(--color-text-secondary); font-size: 0.9rem; max-width: 300px; }
+        .footer-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 1rem; }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+        .footer-links a { text-decoration: none; color: var(--color-text-secondary); font-size: 0.9rem; transition: color 0.2s ease; }
+        .footer-links a:hover { color: var(--color-primary); }
+        .footer-bottom { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #cbd5e1; text-align: center; font-size: 0.85rem; color: var(--color-text-secondary); }
         
-        /* RESPONSIVE */
+        /* Responsive */
+        @media (min-width: 640px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 768px) { .nav-links { display: flex; } #menu-toggle { display: none; } .footer-grid { grid-template-columns: repeat(4, 1fr); } }
         @media (max-width: 767px) {
             .section-title { font-size: 1.8rem; }
+            .header { width: 90%; top: 1rem; }
+            body { padding-top: 6rem; }
             .winners-podium { flex-direction: column; align-items: center; gap: 2rem; }
             .winner-card.place-1, .winner-card.place-2, .winner-card.place-3 { order: 0; margin-bottom: 0; transform: scale(1); }
             .winner-card.place-1 { order: -1; }
@@ -71,12 +127,12 @@
                     <li><a href="quiz.html" class="active">Pemenang Quiz</a></li>
                 </ul>
             </nav>
-            <button id="menu-toggle" aria-label="Buka Menu"><i class="fas fa-bars"></i></button>
+            <button id="menu-toggle"><i class="fas fa-bars"></i></button>
         </div>
     </header>
 
     <div id="mobile-menu">
-        <button id="menu-close" aria-label="Tutup Menu"><i class="fas fa-times"></i></button>
+        <button id="menu-close"><i class="fas fa-times"></i></button>
         <ul class="mobile-nav-links">
             <li><a href="index.html">Portofolio</a></li>
             <li><a href="galeri.html">Galeri</a></li>
@@ -94,7 +150,32 @@
     </main>
 
     <footer class="footer">
-        </footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">Sekolah Al Bunyan</div>
+                    <p>Membentuk generasi yang berakhlak mulia, cerdas, dan kreatif melalui pendidikan berkualitas.</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Navigasi</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Portofolio</a></li>
+                        <li><a href="galeri.html">Galeri</a></li>
+                        <li><a href="quiz.html">Pemenang Quiz</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                     <h3 class="footer-title">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://albunyan.sch.id/" target="_blank">Website Utama</a></li>
+                        <li><a href="https://albunyan.sch.id/kontak/" target="_blank">Kontak</a></li>
+                        <li><a href="https://albunyan.sch.id/ppdb/" target="_blank">PPDB</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom"> &copy; 2024 Sekolah Al Bunyan. All rights reserved. </div>
+        </div>
+    </footer>
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -102,12 +183,10 @@
         const mobileMenu = document.getElementById('mobile-menu');
         const menuToggle = document.getElementById('menu-toggle');
         const menuClose = document.getElementById('menu-close');
-        if (menuToggle && mobileMenu && menuClose) {
-            menuToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
-            menuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
-        }
+        menuToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
+        menuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
 
-        // WINNERS PAGE LOGIC
+        // Data Kuis
         const quizzes = [
             {
                 title: "Quiz Ekskul Programming 1",
@@ -120,31 +199,25 @@
             }
         ];
 
-        function renderWinners() {
-            const container = document.getElementById('winners-container');
-            if (!container) return;
-            container.innerHTML = quizzes.map(quiz => {
-                const podiumHtml = quiz.winners.map(winner => `
-                    <div class="winner-card place-${winner.place}">
-                        <div class="place-icon"><i class="fas ${winner.icon}"></i></div>
-                        <div class="place-label">Juara ${winner.place}</div>
-                        <div class="winner-name">${winner.name}</div>
-                        <div class="winner-score">${winner.score}</div>
+        // Render Pemenang
+        const container = document.getElementById('winners-container');
+        container.innerHTML = quizzes.map(quiz => {
+            const podiumHtml = quiz.winners.map(winner => `
+                <div class="winner-card place-${winner.place}">
+                    <div class="place-icon"><i class="fas ${winner.icon}"></i></div>
+                    <div class="winner-name">${winner.name}</div>
+                    <div class="winner-score">${winner.score}</div>
+                </div>
+            `).join('');
+            return `
+                <div class="quiz-result-block">
+                    <h2 class="quiz-title">${quiz.title}</h2>
+                    <div class="quiz-result-image">
+                        <img src="${quiz.image}" alt="Hasil ${quiz.title}" onerror="this.style.display='none'">
                     </div>
-                `).join('');
-                return `
-                    <div class="quiz-result-block">
-                        <h2 class="quiz-title">${quiz.title}</h2>
-                        <div class="quiz-result-image">
-                            <img src="${quiz.image}" alt="Hasil ${quiz.title}" onerror="this.style.display='none'">
-                        </div>
-                        <div class="winners-podium">${podiumHtml}</div>
-                    </div>`;
-            }).join('');
-        }
-        
-        // INITIALIZE APP
-        renderWinners();
+                    <div class="winners-podium">${podiumHtml}</div>
+                </div>`;
+        }).join('');
     });
     </script>
 </body>
