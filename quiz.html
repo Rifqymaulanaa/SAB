@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemenang Quiz - Sekolah Al Bunyan</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* CSS-nya sama persis dengan index.html, namun ditambahkan style khusus pemenang */
+        :root { /* ... (salin semua :root dari index.html) ... */ }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; padding-top: 7rem; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 1.25rem; }
+        .page { padding-bottom: 4rem; animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* HEADER / NAVIGATION (SAMA DENGAN INDEX.HTML) */
+        .header { position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%); z-index: 50; width: 95%; max-width: 800px; background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid #e2e8f0; transition: all 0.3s ease; border-radius: 9999px; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        /* ... (salin semua style header & mobile menu dari index.html) ... */
+
+        /* WINNERS PAGE */
+        .section-title { font-size: 2.25rem; font-weight: 700; text-align: center; margin-bottom: 3rem; }
+        .quiz-result-block { background-color: #ffffff; border-radius: 1rem; padding: 2rem; margin-bottom: 3rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); border: 1px solid #e2e8f0; }
+        .quiz-title { font-size: 1.8rem; font-weight: 700; text-align: center; margin-bottom: 2rem; }
+        .quiz-result-image { max-width: 800px; margin: 0 auto 2rem auto; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+        .quiz-result-image img { width: 100%; display: block; }
+        .winners-podium { display: flex; justify-content: center; align-items: flex-end; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+        .winner-card { background-color: #f8fafc; border-radius: 1rem; padding: 2rem 1.5rem; text-align: center; border: 1px solid #e2e8f0; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); width: 280px; position: relative; transition: transform 0.3s ease; }
+        .winner-card:hover { transform: translateY(-10px); }
+        .winner-card .place-icon { font-size: 3.5rem; margin-bottom: 1rem; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .winner-card .place-label { font-size: 1rem; font-weight: 500; color: #475569; margin-bottom: 0.5rem; }
+        .winner-card .winner-name { font-size: 1.75rem; font-weight: 700; color: #1e293b; }
+        .winner-card .winner-score { margin-top: 0.5rem; font-size: 1.25rem; font-weight: 500; color: #64748b; }
+        .winner-card.place-2 { order: 1; margin-bottom: 1rem; }
+        .winner-card.place-1 { order: 2; margin-bottom: 3rem; transform: scale(1.1); z-index: 10;}
+        .winner-card.place-3 { order: 3; }
+        .winner-card.place-1 .place-icon { color: #ffd700; }
+        .winner-card.place-2 .place-icon { color: #c0c0c0; }
+        .winner-card.place-3 .place-icon { color: #cd7f32; }
+        
+        /* FOOTER (SAMA DENGAN INDEX.HTML) */
+        .footer { padding: 4rem 2rem 2rem; background-color: #e2e8f0; border-top: 1px solid #e2e8f0; margin-top: 4rem; }
+        /* ... (salin semua style footer dari index.html) ... */
+        
+        /* RESPONSIVE */
+        @media (max-width: 767px) {
+            .section-title { font-size: 1.8rem; }
+            .winners-podium { flex-direction: column; align-items: center; gap: 2rem; }
+            .winner-card.place-1, .winner-card.place-2, .winner-card.place-3 { order: 0; margin-bottom: 0; transform: scale(1); }
+            .winner-card.place-1 { order: -1; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <img src="logoSAB.png" alt="Sekolah Al Bunyan Logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Portofolio</a></li>
+                    <li><a href="galeri.html">Galeri</a></li>
+                    <li><a href="quiz.html" class="active">Pemenang Quiz</a></li>
+                </ul>
+            </nav>
+            <button id="menu-toggle" aria-label="Buka Menu"><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
+
+    <div id="mobile-menu">
+        <button id="menu-close" aria-label="Tutup Menu"><i class="fas fa-times"></i></button>
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Portofolio</a></li>
+            <li><a href="galeri.html">Galeri</a></li>
+            <li><a href="quiz.html" class="active">Pemenang Quiz</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <div class="page">
+            <div class="container">
+                <h1 class="section-title">🏆 Papan Juara Quiz 🏆</h1>
+                <div id="winners-container"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Mobile Menu Logic
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        if (menuToggle && mobileMenu && menuClose) {
+            menuToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
+            menuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+        }
+
+        // WINNERS PAGE LOGIC
+        const quizzes = [
+            {
+                title: "Quiz Ekskul Programming 1",
+                image: "quiz1.png",
+                winners: [
+                    { place: 1, name: "deexsoon", score: "7956 Poin", icon: "fa-trophy" },
+                    { place: 2, name: "acopep", score: "7681 Poin", icon: "fa-medal" },
+                    { place: 3, name: "Ihsan", score: "7065 Poin", icon: "fa-medal" }
+                ]
+            }
+        ];
+
+        function renderWinners() {
+            const container = document.getElementById('winners-container');
+            if (!container) return;
+            container.innerHTML = quizzes.map(quiz => {
+                const podiumHtml = quiz.winners.map(winner => `
+                    <div class="winner-card place-${winner.place}">
+                        <div class="place-icon"><i class="fas ${winner.icon}"></i></div>
+                        <div class="place-label">Juara ${winner.place}</div>
+                        <div class="winner-name">${winner.name}</div>
+                        <div class="winner-score">${winner.score}</div>
+                    </div>
+                `).join('');
+                return `
+                    <div class="quiz-result-block">
+                        <h2 class="quiz-title">${quiz.title}</h2>
+                        <div class="quiz-result-image">
+                            <img src="${quiz.image}" alt="Hasil ${quiz.title}" onerror="this.style.display='none'">
+                        </div>
+                        <div class="winners-podium">${podiumHtml}</div>
+                    </div>`;
+            }).join('');
+        }
+        
+        // INITIALIZE APP
+        renderWinners();
+    });
+    </script>
+</body>
+</html>
